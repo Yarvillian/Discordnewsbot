@@ -2,18 +2,26 @@
 import discord
 # Import the os module.
 import os
+#NEWSAPI needs requests
+import requests
 #Used for NewsAPI
 from newsapi import NewsApiClient
-api = NewsApiClient(NEWSAPI_TOKEN)
 # Import load_dotenv function from dotenv module.
 from dotenv import load_dotenv
 # Loads the .env file that resides on the same level as the script.
 load_dotenv()
 # Grab the API token from the .env file.
 DISCORD_TOKEN = os.getenv("DISCORD_TOKEN")
+NEWSAPI_TOKEN = os.getenv("NEWSAPI_TOKEN")
 # GETS THE CLIENT OBJECT FROM DISCORD.PY. CLIENT IS SYNONYMOUS WITH BOT.
 bot = discord.Client()
 
+#test for /top-headlines endpoint
+url = ('http://newsapi.org/v2/top-headlines?'
+       'country=us&'
+       'apiKey=NEWSAPI_TOKEN')
+response = requests.get(url)
+print response.json()
 # EVENT LISTENER FOR WHEN THE BOT HAS SWITCHED FROM OFFLINE TO ONLINE.
 @bot.event
 async def on_ready():
