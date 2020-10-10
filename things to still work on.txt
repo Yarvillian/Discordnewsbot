@@ -1,0 +1,3 @@
+add ssh from linux
+ask about wrapper and how that works
+search "you can literally just do this" in the discord conversation
