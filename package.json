@@ -1,0 +1,23 @@
+{
+  "name": "yarv_discord_news_bot",
+  "version": "1.0.0",
+  "description": "Discord bot for tracking the news. This is my first Discord Bot creation.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Yarvillian/Discordnewsbot.git"
+  },
+  "keywords": [],
+  "author": "Yarv",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Yarvillian/Discordnewsbot/issues"
+  },
+  "homepage": "https://github.com/Yarvillian/Discordnewsbot#readme",
+  "dependencies": {
+    "discord.js": "^12.3.1"
+  }
+}
