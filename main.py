@@ -5,7 +5,7 @@ import os
 #NEWSAPI needs requests
 import requests
 #Used for NewsAPI
-from newsapi import NewsApiClient
+from newsapi.newsapi_client import NewsApiClient
 # Import load_dotenv function from dotenv module.
 from dotenv import load_dotenv
 # Loads the .env file that resides on the same level as the script.
@@ -16,28 +16,6 @@ NEWSAPI_TOKEN = os.getenv("NEWSAPI_TOKEN")
 # GETS THE CLIENT OBJECT FROM DISCORD.PY. CLIENT IS SYNONYMOUS WITH BOT.
 bot = discord.Client()
 
-#test for /top-headlines endpoint STILL IN TESTING
-
-
-# /v2/top-headlines
-top_headlines = newsapi.get_top_headlines(q='bitcoin',
-    sources='bbc-news,the-verge',
-    category='business',
-    language='en',
-    country='us')
-
-# /v2/everything
-all_articles = newsapi.get_everything(q='bitcoin',
-    sources='bbc-news,the-verge',
-    domains='bbc.co.uk,techcrunch.com',
-    from_param='2017-12-01',
-    to='2017-12-12',
-    language='en',
-    sort_by='relevancy',
-    page=2)
-
-# /v2/sources
-sources = newsapi.get_sources()
 # EVENT LISTENER FOR WHEN THE BOT HAS SWITCHED FROM OFFLINE TO ONLINE.
 @bot.event
 async def on_ready():
