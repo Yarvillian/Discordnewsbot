@@ -32,14 +32,23 @@ async def on_ready():
 
 	# PRINTS HOW MANY GUILDS / SERVERS THE BOT IS IN.
 	print("SampleDiscordBot is in " + str(guild_count) + " guilds.")
-
-# EVENT LISTENER FOR WHEN A NEW MESSAGE IS SENT TO A CHANNEL.
+#Initialize newsapi
+newsapi = NewsApiClient(api_key=NEWSAPI_TOKEN)
+# /v2/top-headlines
 @bot.event
 async def on_message(message):
 	# CHECKS IF THE MESSAGE THAT WAS SENT IS EQUAL TO "HELLO".
 	if message.content == "hello":
 		# SENDS BACK A MESSAGE TO THE CHANNEL.
 		await message.channel.send("Message Recieved.")
-
+	if message.content == "help":
+		await message.channel.send("This bot currently can return breaking news headlines for a country and category with the '!headlines'.")
+	if message.content == "!headlines": # CHECKS IF THE MESSAGE THAT WAS SENT IS EQUAL TO "!headlines".
+		top_headlines = newsapi.get_top_headlines(q='Apple',
+                                          sources='CNN',
+                                          language='en',
+                                          )
+		print(f'headlines:{top_headlines}')
+		await message.channel.send("Hey we got here.")
 # EXECUTES THE BOT WITH THE SPECIFIED TOKEN. TOKEN HAS BEEN REMOVED AND USED JUST AS AN EXAMPLE.
 bot.run(DISCORD_TOKEN)
