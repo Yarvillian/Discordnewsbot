@@ -2,8 +2,6 @@
 import discord
 # Import the os module.
 import os
-#NEWSAPI needs requests
-import requests
 #Used for NewsAPI
 from newsapi.newsapi_client import NewsApiClient
 # Import load_dotenv function from dotenv module.
@@ -34,6 +32,7 @@ async def on_ready():
 	print("SampleDiscordBot is in " + str(guild_count) + " guilds.")
 #Initialize newsapi
 newsapi = NewsApiClient(api_key=NEWSAPI_TOKEN)
+ussources = newsapi.get_sources(language="en", country="us")
 # /v2/top-headlines
 @bot.event
 async def on_message(message):
@@ -44,11 +43,16 @@ async def on_message(message):
 	if message.content == "help":
 		await message.channel.send("This bot currently can return breaking news headlines for a country and category with the '!headlines'.")
 	if message.content == "!headlines": # CHECKS IF THE MESSAGE THAT WAS SENT IS EQUAL TO "!headlines".
-		top_headlines = newsapi.get_top_headlines(q='Apple',
-                                          sources='CNN',
-                                          language='en',
-                                          )
-		print(f'headlines:{top_headlines}')
-		await message.channel.send("Hey we got here.")
+		top_headlines = newsapi.get_top_headlines(sources='cnn',
+												page_size = 2)
+		#print(f'headlines:{top_headlines}') this prints everything written by Ali as help
+		articles = top_headlines["articles"]
+		for article in articles:
+			await message.channel.send('''**Title of Story:** ''' + article["title"])
+			await message.channel.send('''**Description:** ''' + article["description"])
+			await message.channel.send('''**URL for story, click for more:** ''' + article["url"])
+			await message.channel.send('''**Publish time:** ''' + article["publishedAt"])
+			await message.channel.send('''** **''') #empty lines to look pretty
+			await message.channel.send('''** **''') #empty lines to look pretty
 # EXECUTES THE BOT WITH THE SPECIFIED TOKEN. TOKEN HAS BEEN REMOVED AND USED JUST AS AN EXAMPLE.
 bot.run(DISCORD_TOKEN)
