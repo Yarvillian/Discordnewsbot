@@ -37,10 +37,10 @@ ussources = newsapi.get_sources(language="en", country="us")
 @bot.event
 async def on_message(message):
 	# CHECKS IF THE MESSAGE THAT WAS SENT IS EQUAL TO "HELLO".
-	if message.content == "hello":
+	if message.content == "!hello":
 		# SENDS BACK A MESSAGE TO THE CHANNEL.
-		await message.channel.send("Message Recieved.")
-	if message.content == "help":
+		await message.channel.send("Message Recieved. Hey There!")
+	if message.content == "!help":
 		await message.channel.send("This bot currently can return breaking news headlines for a country and category with the '!headlines'.")
 	if message.content == "!headlines": # CHECKS IF THE MESSAGE THAT WAS SENT IS EQUAL TO "!headlines".
 		top_headlines = newsapi.get_top_headlines(sources='cnn',
@@ -52,7 +52,7 @@ async def on_message(message):
 			await message.channel.send('''**Description:** ''' + article["description"])
 			await message.channel.send('''**URL for story, click for more:** ''' + article["url"])
 			await message.channel.send('''**Publish time:** ''' + article["publishedAt"])
-			await message.channel.send('''** **''') #empty lines to look pretty
-			await message.channel.send('''** **''') #empty lines to look pretty
+			await message.channel.send('''** **''') #empty lines to seperate the stories
+			await message.channel.send('''** **''') #empty lines to seperate the stories
 # EXECUTES THE BOT WITH THE SPECIFIED TOKEN. TOKEN HAS BEEN REMOVED AND USED JUST AS AN EXAMPLE.
 bot.run(DISCORD_TOKEN)
