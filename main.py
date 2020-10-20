@@ -35,13 +35,14 @@ newsapi = NewsApiClient(api_key=NEWSAPI_TOKEN)
 ussources = newsapi.get_sources(language="en", country="us")
 # /v2/top-headlines
 @bot.event
-async def on_message(message):
+async def on_message(message, *args):
 	# CHECKS IF THE MESSAGE THAT WAS SENT IS EQUAL TO "HELLO".
 	if message.content == "!hello":
 		# SENDS BACK A MESSAGE TO THE CHANNEL.
-		await message.channel.send("Message Recieved. Hey There!")
+		await message.channel.send("Message Recieved. Hey There!") #bot response to hello
 	if message.content == "!help":
-		await message.channel.send("This bot currently can return breaking news headlines for a country and category with the '!headlines'.")
+		# SENDS WHAT TO DO TO HELP THE USER
+		await message.channel.send("This bot currently can return breaking news headlines for a country and category with the !headlines.")
 	if message.content == "!headlines": # CHECKS IF THE MESSAGE THAT WAS SENT IS EQUAL TO "!headlines".
 		top_headlines = newsapi.get_top_headlines(sources='cnn',
 												page_size = 2)
